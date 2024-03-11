@@ -24,6 +24,6 @@ This is a simple Snake game implemented in Python using the Pygame library.
    ```
    pip install pygame
    ```
-3. Run `snake_game.py` to start the game.
+3. Run `SnakeV-0.1` to start the game.
 
 Enjoy playing! 🐍
