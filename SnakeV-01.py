@@ -93,6 +93,7 @@ def gameloop():
     snake_list = []
     snake_length = 1
     FPS = 60
+    snake_direction = "n"
     # check if highscore
     if (not os.path.exists("highscore.txt")):
         with open("highscore.txt", "w") as f:
@@ -123,18 +124,25 @@ def gameloop():
                 
             
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_RIGHT:
+                    if event.key == pygame.K_RIGHT and snake_direction != "l":
                         velocity_x = init_velocity
                         velocity_y = 0
-                    if event.key == pygame.K_LEFT:
+                        snake_direction = "r"
+                    if event.key == pygame.K_LEFT and snake_direction != "r":
                         velocity_x = -init_velocity
                         velocity_y = 0
-                    if event.key == pygame.K_UP:
+                        snake_direction = "l"
+                    if event.key == pygame.K_UP and snake_direction != "d":
                         velocity_y = -init_velocity
                         velocity_x = 0
-                    if event.key == pygame.K_DOWN:
+                        snake_direction = "u"
+
+                    if event.key == pygame.K_DOWN and snake_direction != "u":
                         velocity_y = init_velocity
                         velocity_x = 0
+                        snake_direction = "d"
+
+
             snake_x+=velocity_x
             snake_y+=velocity_y  
             if (abs(snake_x - food_x ) < 12) and (abs(snake_y - food_y) < 12 ):
@@ -171,7 +179,7 @@ def gameloop():
                 game_over = True 
                 pygame.mixer.music.load("assets\\gameover.wav")  
                 pygame.mixer.music.play(1)
-                
+
             plot_snake(gameWindow,blue , snake_list, snake_size)
             # pygame.draw.rect(gameWindow,blue,[snake_x, snake_y, snake_size, snake_size])
             # pygame.draw.circle(gameWindow, blue, (snake_x, snake_y), snake_size)
